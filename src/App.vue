@@ -1,14 +1,53 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <select name="xAxis" v-model="xAxis">
+      <option
+        :key="i"
+        v-for="(nodeType, i) in filteredNodeTypes"
+      >{{ nodeType }}</option>
+    </select>
+    <br>
+    <input placeholder="y axis" type="text" :value="y">
+    <br>
+    <input placeholder="z axis" type="text" :value="z">
+    <br>
+    <input placeholder="Target Node" type="text" :value="target">
+    <Visualizer :xAxis="xAxis"></Visualizer>
   </div>
 </template>
 
-<style lang="scss">
+<script>
+import Constants from './constants.js'
+import Visualizer from './views/Visualizer.vue'
+
+export default {
+  components: {
+    Visualizer
+  },
+
+  data() {
+    return {
+      nodeTypes: Constants.NODE_TYPES,
+      xAxis: 'ExpressionStatement',
+      y: 'BlockStatement',
+      z: '',
+      target: ''
+    }
+  },
+
+  mounted() {
+    console.log(Constants.NODE_TYPES);
+  },
+
+  computed: {
+    filteredNodeTypes() {
+      return Object.keys(this.nodeTypes)
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

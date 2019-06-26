@@ -37,3 +37,33 @@ npm run test:unit
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+## Thought Process
+
+The `x` axis is TIME
+The `y` axis is SCOPE 
+The `z` axis is BLOCKS
+
+
+## Ideas
+
+* render cubes for each section of code
+  * enter a cube to enter new view of that scope
+    * all outer elements can hide (remember scope chain for backtracking)
+    * render new cubes for sections within current scope
+      * enter a cube to enter new view of that scope
+      * all outer elements can hide (remember scope chain for backtracking)
+        * repeat...
+        * repeat...
+          * repeat...
+          * repeat....................
+  
+
+## TODO
+
+need to set up y and z coords
+create new components to represent axis
+refactor scope to not represent an axis
+
+make vr ui
