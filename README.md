@@ -67,3 +67,13 @@ create new components to represent axis
 refactor scope to not represent an axis
 
 make vr ui
+
+add settings to control `universal-controls` easing and acceleration
+
+
+maybe, scopes are dynamically sized based on amount of code that fills it
+  scopes render 'axes' components that handle parsing on a specified axis
+  * would be cool to see size differences in programs/dependencies
+
+
+Need to make a 3D graph to represent connections between functions, dependencies, etc.

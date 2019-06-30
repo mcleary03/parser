@@ -1,27 +1,30 @@
 <template>
   <a-box
+    :position="$coordString(position)"
+    :rotation="$coordString(rotation)"
+    :width="globalScale * width"
+    :depth="globalScale * depth"
+    :height="globalScale * height"
     :color="color"
-    :depth="depth"
-    :height="height"
-    :opacity="opacity"
-    :position="stringIt(position)"
-    :rotation="stringIt(rotation)"
-    :transparent="opacity < 1"
     :visible="visible"
-    :width="width"
+    :opacity="opacity"
+    :transparent="opacity < 1"
   >
     <code-text
       :ast="snippet"
-      :color="'#CFC'"
-      :height="0.2"
       :i="i"
-      :key="i"
       :opacity="1"
-      :position="{x: 0, y: 0, z: 0.5-i*0.1}"
+      :position="{
+        x: globalScale * 0,
+        y: globalScale * 0,
+        z: globalScale * (0.5-i*0.1)}"
       :rotation="{x: 0, y: 0, z: 0}"
+      :width="globalScale * width"
+      :height="globalScale * height"
+      :color="'#CFC'"
       :textColor="'#333'"
       :visible="true"
-      :width="0.2"
+      :key="i"
       v-for="(snippet, i) in snippets"
     ></code-text>
   </a-box>
@@ -52,25 +55,22 @@ export default {
       walk.ancestor(this.ast, {
         // I can swap out this function for any type of node I want to render code text for.  Could use props for this...
         Statement(node) {
-          console.log('node', node)
           snippetArray.unshift(node)
         }
       })
-      console.log('snippets: ', snippetArray)
-
-      // WHY IS THIS EMPTY!?!!?!?!!???!??!??!?????!
 
       return snippetArray
     }
   },
 
   mounted() {
-    console.log('Block', this.ast)
+    // console.log('Block', this.ast)
   },
 
   props: {
     ast: {default: () => ({}), type: Object},
-    color: {default: '#42c2f4', type: String},
+    globalScale: {default: 1, type: Number},
+    color: {default: '#a9f3fc', type: String},
     depth: {default: 0.2, type: Number},
     height: {default: 0.2, type: Number},
     opacity: {default: 0.2, type: Number},

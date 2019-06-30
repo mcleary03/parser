@@ -2,10 +2,10 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import StringIt from './plugins/StringIt'
+import Utils from './plugins/Utils'
 import './registerServiceWorker'
 
-Vue.use(StringIt)
+Vue.use(Utils)
 
 Vue.config.productionTip = false
 

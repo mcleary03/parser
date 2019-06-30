@@ -1,19 +1,23 @@
 <template>
   <a-text
+    :font="'sourcecodepro'"
     :color="color"
     :height="height"
     :geometry="`primitive: plane;
-                height: 1;
-                width: 1`"
+                height: ${height};
+                width: ${width}`"
     :material="`color: ${textColor};
                 opacity: ${opacity};
                 transparent: ${opacity < 1};
                 side: double`"
-    :position="stringIt(position)"
-    :rotation="stringIt(rotation)"
+    :position="$coordString(position)"
+    :rotation="$coordString(rotation)"
     :visible="visible"
+    :anchor="'center'"
+    :wrap-count="'40'"
     :width="width"
-    :value="codeStr(ast)"
+    :align="'left'"
+    :value="codeString"
   ></a-text>
 </template>
 
@@ -24,15 +28,9 @@ import { generate } from 'astring'
 export default {
   name: 'CodeText',
 
-  data() {
-    return {
-      codeText: this.codeStr(this.ast)
-    }
-  },
-  methods: {
-    codeStr(ast) {
-      // console.log('ast', ast)
-      return generate(ast).toString()
+  computed: {
+    codeString() {
+      return generate(this.ast).toString()
     }
   },
 
@@ -50,7 +48,7 @@ export default {
   },
 
   mounted() {
-    console.log('CodeText '+this.i, this.ast)
+    // console.log('CodeText '+this.i, this.ast)
   }
 }
 </script>
