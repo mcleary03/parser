@@ -13,8 +13,9 @@
         movementEasing: ${globalScale * 15};
         movementAcceleration: ${globalScale * 80};`"
     ></a-entity>
-    <!-- Testing animation events -->
+
     <a-entity cursor="rayOrigin: mouse"></a-entity>
+    <a-entity gearvr-controls="hand: right"></a-entity>
 
     <!-- Code Blocks in Current Scope -->
     <scope

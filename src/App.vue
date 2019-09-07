@@ -43,6 +43,10 @@
       <input type="number" step="0.1" v-model="globalScale">
     </label>
     
+    <br><br>
+    
+    <Tree></Tree>
+
     <Visualizer :ast="ast" :xAxis="xAxis" :yAxis="yAxis" :zAxis="zAxis" :globalScale="globalScale"></Visualizer>
 
   </div>
@@ -50,15 +54,37 @@
 
 <script>
 import { Parser } from 'acorn'
+import Tree from '@/components/Tree.vue'
 import Visualizer from './views/Visualizer.vue'
 import fizzBuzz from '@/testSnippets/fizzBuzz'
 import foo from '@/testSnippets/foo'
 import { COLORS } from '@/constants'
 
+import * as walk from 'acorn-walk'
+
+const parse = ast => {
+  const parsedAST = Parser.parse(ast, {
+    ecmaVersion: 9,
+    sourceType: 'module',
+    allowReserved: true
+  })
+
+  const formatter = (node, state, array) => {
+    console.log(node)
+    console.log(array.map(n=>JSON.parse(JSON.stringify(n))))
+  }
+
+  const formatted = walk.fullAncestor(parsedAST, formatter) 
+
+}
 
 export default {
   components: {
-    Visualizer
+    Visualizer,
+    Tree
+  },
+  mounted() {
+    parse(foo)
   },
 
   data() {

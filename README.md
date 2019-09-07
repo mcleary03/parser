@@ -77,3 +77,15 @@ maybe, scopes are dynamically sized based on amount of code that fills it
 
 
 Need to make a 3D graph to represent connections between functions, dependencies, etc.
+
+
+
+
+
+walk the tree to reformat into 'children' arrays so that vue3dtree works correctly.
+* need to make unique identifier for each node and keep track for reference.
+* need to write function to convert to 'children' arrays
+  * rename 'body' arrays to 'children
+  * wrap all objects in a 'children' array so they form a branch
+  * add ui to control 2d rendering or hook into existing 3d model's 2d interface(probably better to get see both at once)
+  
